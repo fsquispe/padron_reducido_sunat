@@ -40,4 +40,4 @@ Thumbs.db
 .vscode
 
 # project
-*/settings/local.py
+full.in
