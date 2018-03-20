@@ -24,21 +24,23 @@ DROP TABLE IF EXISTS `padron`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `padron` (
   `ruc` bigint(11) unsigned NOT NULL,
-  `razon_social` varchar(255) NOT NULL,
-  `estado_contribuyente` varchar(45) NOT NULL,
-  `codicion_domicilio` varchar(45) NOT NULL,
+  `razon_social` char(128) NOT NULL,
+  `estado_contribuyente` char(20) NOT NULL,
+  `codicion_domicilio` char(20) NOT NULL,
   `ubigeo` char(6) NOT NULL,
-  `tipo_via` varchar(45) NOT NULL,
-  `nombre_via` varchar(45) NOT NULL,
-  `codigo_zona` varchar(45) NOT NULL,
-  `tipo_zona` varchar(45) NOT NULL,
-  `numero` varchar(45) NOT NULL,
-  `interior` varchar(45) NOT NULL,
-  `lote` varchar(45) NOT NULL,
-  `departamento` varchar(45) NOT NULL,
-  `manzana` varchar(45) NOT NULL,
-  `kilometro` varchar(45) NOT NULL,
-  PRIMARY KEY (`ruc`)
+  `tipo_via` char(4) NOT NULL,
+  `nombre_via` char(40) NOT NULL,
+  `codigo_zona` char(6) NOT NULL,
+  `tipo_zona` char(40) NOT NULL,
+  `numero` char(25) NOT NULL,
+  `interior` char(10) NOT NULL,
+  `lote` char(10) NOT NULL,
+  `departamento` char(10) NOT NULL,
+  `manzana` char(15) NOT NULL,
+  `kilometro` char(10) NOT NULL,
+  `_fts` varchar(380) NOT NULL,
+  PRIMARY KEY (`ruc`),
+  FULLTEXT KEY `_fts` (`_fts`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-19 17:00:09
+-- Dump completed on 2018-03-20 11:41:16

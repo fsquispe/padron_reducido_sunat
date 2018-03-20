@@ -16,7 +16,7 @@ def main():
         db="sunat"
     )
     
-    group_insert = 1000
+    group_insert = 5000
     
     query_base = """
         INSERT INTO padron (
@@ -34,11 +34,12 @@ def main():
             lote,
             departamento,
             manzana,
-            kilometro)
+            kilometro,
+            _fts)
         VALUES %s;
     """
     
-    query_params = "('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')"
+    query_params = "('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')"
     
     i = 0
     n = 0
@@ -50,7 +51,8 @@ def main():
             l = line.replace("\\", "")
             l = l.replace("'", "\\'")
             lst = l.split('|')
-            query_block += (query_params % (lst[0], lst[1], lst[2], lst[3], lst[4], lst[5], lst[6], lst[7], lst[8], lst[9], lst[10], lst[11], lst[12], lst[13], lst[14]))
+            lst.pop()
+            query_block += (query_params % (lst[0], lst[1], lst[2], lst[3], lst[4], lst[5], lst[6], lst[7], lst[8], lst[9], lst[10], lst[11], lst[12], lst[13], lst[14], " ".join(lst)))
             if i < group_insert and n < num_records: query_block += ','
             if i == group_insert or n == num_records:
                 db.query(query_base % query_block)
@@ -58,4 +60,4 @@ def main():
                 query_block = ''
 
 if __name__ == "__main__":
-	main()
+    main()
