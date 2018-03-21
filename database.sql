@@ -38,9 +38,7 @@ CREATE TABLE `padron` (
   `departamento` char(10) NOT NULL,
   `manzana` char(15) NOT NULL,
   `kilometro` char(10) NOT NULL,
-  `_fts` varchar(380) NOT NULL,
   PRIMARY KEY (`ruc`),
-  FULLTEXT KEY `_fts` (`_fts`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
