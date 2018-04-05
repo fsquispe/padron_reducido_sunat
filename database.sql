@@ -24,20 +24,11 @@ DROP TABLE IF EXISTS `padron`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `padron` (
   `ruc` bigint(11) unsigned NOT NULL,
-  `razon_social` char(128) NOT NULL,
-  `estado_contribuyente` char(20) NOT NULL,
-  `codicion_domicilio` char(20) NOT NULL,
+  `razon_social` varchar(128) NOT NULL,
+  `estado_contribuyente` enum('ACTIVO','BAJA DE OFICIO','BAJA DEFINITIVA','SUSPENSION TEMPORAL','BAJA PROV. POR OFICI','NUM. INTERNO IDENTIF','BAJA MULT.INSCR. Y O','OTROS OBLIGADOS','ANUL.PROVI.-ACTO ILI','BAJA PROVISIONAL','ANULACION - ERROR SU','PENDIENTE DE INI. DE','ANULACION - ACTO ILI','INHABILITADO-VENT.UN') NOT NULL,
+  `codicion_domicilio` enum('HABIDO','NO APLICABLE','NO HALLADO DESTINATA','NO HABIDO','NO HALLADO CERRADO','NO HALLADO OTROS MOT','NO HALLADO SE MUDO D','NO HALLADO NRO.PUERT','NO HALLADO RECHAZADO','PENDIENTE','NO HALLADO NO EXISTE','NO HALLADO FALLECIO','NO HALLADO','POR VERIFICAR','-') NOT NULL,
   `ubigeo` char(6) NOT NULL,
-  `tipo_via` char(4) NOT NULL,
-  `nombre_via` char(40) NOT NULL,
-  `codigo_zona` char(6) NOT NULL,
-  `tipo_zona` char(40) NOT NULL,
-  `numero` char(25) NOT NULL,
-  `interior` char(10) NOT NULL,
-  `lote` char(10) NOT NULL,
-  `departamento` char(10) NOT NULL,
-  `manzana` char(15) NOT NULL,
-  `kilometro` char(10) NOT NULL,
+  `domicilio_fiscal` varchar(128) NOT NULL,
   PRIMARY KEY (`ruc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-20 11:41:16
+-- Dump completed on 2018-04-05 17:16:34
