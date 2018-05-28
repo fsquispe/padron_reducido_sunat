@@ -8,7 +8,7 @@ from tqdm import tqdm
 def main():
     filename = str(sys.argv[1])
     num_records = sum(1 for line in open(filename, 'r', encoding='ISO-8859-1'))
-    
+    num_records -= 1
     db=_mysql.connect(
         host="localhost",
         user="root",
@@ -37,6 +37,7 @@ def main():
     domicilio = ''
     domicilio_lst = []
     with open(filename, 'r', encoding='ISO-8859-1') as f:
+        f.readline()
         for line in tqdm(f, total=num_records):
             i += 1
             n += 1

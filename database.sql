@@ -29,8 +29,7 @@ CREATE TABLE `padron` (
   `codicion_domicilio` enum('HABIDO','NO APLICABLE','NO HALLADO DESTINATA','NO HABIDO','NO HALLADO CERRADO','NO HALLADO OTROS MOT','NO HALLADO SE MUDO D','NO HALLADO NRO.PUERT','NO HALLADO RECHAZADO','PENDIENTE','NO HALLADO NO EXISTE','NO HALLADO FALLECIO','NO HALLADO','POR VERIFICAR','-') NOT NULL,
   `ubigeo` char(6) NOT NULL,
   `domicilio_fiscal` varchar(128) NOT NULL,
-  PRIMARY KEY (`ruc`),
-  FULLTEXT KEY `fts` (`ruc`,`razon_social`,`domicilio_fiscal`)
+  PRIMARY KEY (`ruc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
