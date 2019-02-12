@@ -2,7 +2,7 @@
 
 import sys
 import time
-import _mysql
+from MySQLdb import _mysql
 from tqdm import tqdm
 
 def main():
