@@ -38,7 +38,7 @@ def main():
     domicilio_lst = []
     with open(filename, 'r', encoding='ISO-8859-1') as f:
         f.readline()
-        db.query("TRUNCATE TRABLE sunat_contribuyente;")
+        db.query("TRUNCATE TABLE sunat_contribuyente;")
         for line in tqdm(f, total=num_records):
             i += 1
             n += 1
