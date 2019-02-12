@@ -41,9 +41,13 @@ def main():
     query_params = "('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s')"
     
     i = 0
+    k = 0
     query_block = ''
     with open(filename, 'r', encoding='ISO-8859-1') as f:
+        db.query("TRUNCATE TRABLE sunat_contribuyente;")
         for line in tqdm(f, total=num_records):
+            if (k == 0): continue
+            k += 1
             i += 1
             l = line.replace("\\", "")
             l = l.replace("'", "\\'")
@@ -58,4 +62,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()
