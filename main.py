@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 def main():
     filename = str(sys.argv[1])
+    print(filename)
     num_records = sum(1 for line in open(filename, 'r', encoding='ISO-8859-1'))
     num_records -= 1
     db=_mysql.connect(
@@ -15,22 +16,24 @@ def main():
         passwd="pwd123",
         db="sunat"
     )
-    
+ 
     group_insert = 1000
-    
+
     query_base = """
-        INSERT INTO padron (
-            ruc,
+        INSERT INTO sunat_contribuyente (
+            id,
             razon_social,
-            estado_contribuyente,
-            codicion_domicilio,
+            estado,
+            condicion,
             ubigeo,
-            domicilio_fiscal)
+            domicilio_fiscal,
+            creado,
+            modificado)
         VALUES %s;
     """
-    
-    query_params = "('%s','%s','%s','%s','%s','%s')"
-    
+
+    query_params = "('%s','%s','%s','%s','%s','%s', NOW(), NOW())"
+
     i = 0
     n = 0
     query_block = ''
