@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 source /root/bin/padron_sql/env/bin/activate
 mkdir /tmp/padron_sql/
