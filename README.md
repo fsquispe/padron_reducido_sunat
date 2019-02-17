@@ -1,2 +1,2 @@
-# PadrÓn reducido SUNAT
-Importar padrón reducido SUNAT a una base de datos MySQL 
+# Padrón reducido SUNAT
+Importar padrón reducido SUNAT a una tabla MySQL 
