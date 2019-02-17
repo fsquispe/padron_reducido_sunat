@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
 --
--- Host: localhost    Database: sunat
+-- Host: localhost    Database: db
 -- ------------------------------------------------------
--- Server version	5.7.21-0ubuntu0.16.04.1
+-- Server version	5.7.25-0ubuntu0.18.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,31 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `padron`
+-- Table structure for table `sunat_contribuyente`
 --
 
-DROP TABLE IF EXISTS `padron`;
+DROP TABLE IF EXISTS `sunat_contribuyente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `padron` (
-  `ruc` char(11) NOT NULL,
+CREATE TABLE `sunat_contribuyente` (
+  `id` char(11) NOT NULL,
   `razon_social` varchar(128) NOT NULL,
-  `estado_contribuyente` enum('ACTIVO','BAJA DE OFICIO','BAJA DEFINITIVA','SUSPENSION TEMPORAL','BAJA PROV. POR OFICI','NUM. INTERNO IDENTIF','BAJA MULT.INSCR. Y O','OTROS OBLIGADOS','ANUL.PROVI.-ACTO ILI','BAJA PROVISIONAL','ANULACION - ERROR SU','PENDIENTE DE INI. DE','ANULACION - ACTO ILI','INHABILITADO-VENT.UN') NOT NULL,
-  `codicion_domicilio` enum('HABIDO','NO APLICABLE','NO HALLADO DESTINATA','NO HABIDO','NO HALLADO CERRADO','NO HALLADO OTROS MOT','NO HALLADO SE MUDO D','NO HALLADO NRO.PUERT','NO HALLADO RECHAZADO','PENDIENTE','NO HALLADO NO EXISTE','NO HALLADO FALLECIO','NO HALLADO','POR VERIFICAR','-') NOT NULL,
+  `estado` enum('ACTIVO','BAJA DE OFICIO','BAJA DEFINITIVA','SUSPENSION TEMPORAL','BAJA PROV. POR OFICI','NUM. INTERNO IDENTIF','BAJA MULT.INSCR. Y O','OTROS OBLIGADOS','ANUL.PROVI.-ACTO ILI','BAJA PROVISIONAL','ANULACION - ERROR SU','PENDIENTE DE INI. DE','ANULACION - ACTO ILI','INHABILITADO-VENT.UN') NOT NULL,
+  `condicion` enum('HABIDO','NO APLICABLE','NO HALLADO DESTINATA','NO HABIDO','NO HALLADO CERRADO','NO HALLADO OTROS MOT','NO HALLADO SE MUDO D','NO HALLADO NRO.PUERT','NO HALLADO RECHAZADO','PENDIENTE','NO HALLADO NO EXISTE','NO HALLADO FALLECIO','NO HALLADO','POR VERIFICAR','-') NOT NULL,
   `ubigeo` char(6) NOT NULL,
   `domicilio_fiscal` varchar(128) NOT NULL,
-  PRIMARY KEY (`ruc`)
+  `creado` datetime(6) NOT NULL,
+  `modificado` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `padron`
---
-
-LOCK TABLES `padron` WRITE;
-/*!40000 ALTER TABLE `padron` DISABLE KEYS */;
-/*!40000 ALTER TABLE `padron` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +44,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-06  8:31:17
+-- Dump completed on 2019-02-17 13:34:04
