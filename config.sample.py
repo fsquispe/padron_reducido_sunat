@@ -1,1 +1,5 @@
-A = 'a'
+"""
+local settings
+"""
+
+CONFIG_A = 'a'

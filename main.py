@@ -1,23 +1,30 @@
 #!/usr/bin/env python
 
 import sys
+import os
 import time
+from .config import *
 from MySQLdb import _mysql
 from tqdm import tqdm
 
 def main():
+    os.system('mkdir ' + CONFIG_TEMP_DIR)
+    filename_zip = CONFIG_TEMP_DIR + 'padron_reducido_ruc.zip'
+    with open(filename_zip, "wb") as file:
+        response = get(CONFIG_PADRON_REDUCIDO_URL)
+        file.write(response.content)
+
     filename = str(sys.argv[1])
-    print(filename)
     num_records = sum(1 for line in open(filename, 'r', encoding='ISO-8859-1'))
     num_records -= 1
     db=_mysql.connect(
-        host="localhost",
-        user="root",
-        passwd="pwd123",
-        db="sunat"
+        host=CONFIG_MYSQL_HOST,
+        user=CONFIG_MYSQL_USER,
+        passwd=CONFIG_MYSQL_PASS,
+        db=CONFIG_MYSQL_DB,
     )
  
-    group_insert = 1000
+    group_insert = CONFIG_MYSQL_INSERT_GROUP
 
     query_base = """
         INSERT INTO sunat_contribuyente (
