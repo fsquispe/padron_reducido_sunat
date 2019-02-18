@@ -1,0 +1,38 @@
+"""
+local settings
+"""
+CONFIG_PADRON_REDUCIDO_URL='http://www2.sunat.gob.pe/padron_reducido_ruc.zip'
+CONFIG_TEMP_DIR='/tmp/padron/'
+
+CONFIG_MYSQL_HOST='host'
+CONFIG_MYSQL_USER='user'
+CONFIG_MYSQL_PASS='password'
+CONFIG_MYSQL_DB='db_name'
+
+CONFIG_MYSQL_INSERT_GROUP=1000
+CONFIG_MYSQL_DROP_TABLE='DROP TABLE IF EXISTS padron_sunat;'
+CONFIG_MYSQL_CREATE_TABLE="""
+CREATE TABLE padron_sunat (
+  id char(11) NOT NULL,
+  razon_social varchar(128) NOT NULL,
+  estado enum('ACTIVO','BAJA DE OFICIO','BAJA DEFINITIVA','SUSPENSION TEMPORAL','BAJA PROV. POR OFICI','NUM. INTERNO IDENTIF','BAJA MULT.INSCR. Y O','OTROS OBLIGADOS','ANUL.PROVI.-ACTO ILI','BAJA PROVISIONAL','ANULACION - ERROR SU','PENDIENTE DE INI. DE','ANULACION - ACTO ILI','INHABILITADO-VENT.UN') NOT NULL,
+  condicion enum('HABIDO','NO APLICABLE','NO HALLADO DESTINATA','NO HABIDO','NO HALLADO CERRADO','NO HALLADO OTROS MOT','NO HALLADO SE MUDO D','NO HALLADO NRO.PUERT','NO HALLADO RECHAZADO','PENDIENTE','NO HALLADO NO EXISTE','NO HALLADO FALLECIO','NO HALLADO','POR VERIFICAR','-') NOT NULL,
+  ubigeo char(6) NOT NULL,
+  domicilio_fiscal varchar(128) NOT NULL,
+  creado datetime(6) NOT NULL,
+  modificado datetime(6) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"""
+CONFIG_MYSQL_INSERT_QUERY="""
+INSERT INTO padron_sunat (
+  id,
+  razon_social,
+  estado,
+  condicion,
+  ubigeo,
+  domicilio_fiscal,
+  creado,
+  modificado)
+  VALUES %s;
+"""

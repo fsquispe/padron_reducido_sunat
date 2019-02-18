@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source /path/to/virtual_env
+/path/to/script/main.py
+deactivate
+#EOF
