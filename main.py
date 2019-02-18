@@ -2,16 +2,13 @@
 
 import os
 from local import *
-from requests import get
 from MySQLdb import _mysql
 from tqdm import tqdm
 
 def main():
     os.system('mkdir ' + CONFIG_TEMP_DIR)
     filename_zip = CONFIG_TEMP_DIR + 'padron_reducido_ruc.zip'
-    with open(filename_zip, "wb") as file:
-        response = get(CONFIG_PADRON_REDUCIDO_URL)
-        file.write(response.content)
+    os.system('wget ' + CONFIG_PADRON_REDUCIDO_URL + ' -O ' + filename_zip)
     os.system('unzip ' + filename_zip + ' -d ' + CONFIG_TEMP_DIR)
     os.system('rm ' + filename_zip)
     filename = CONFIG_TEMP_DIR + 'padron_reducido_ruc.txt'
