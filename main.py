@@ -1,24 +1,29 @@
 #!/usr/bin/env python
 
 import os
-from local import *
-from MySQLdb import _mysql
+import shutil
+import MySQLdb
 from tqdm import tqdm
+from local import *
 
 def main():
-  os.system('mkdir ' + CONFIG_TEMP_DIR)
-  filename_zip = CONFIG_TEMP_DIR + 'padron_reducido_ruc.zip'
+  filename = os.path.join(CONFIG_TEMP_DIR, 'padron_reducido_ruc.txt')
+  filename_zip = os.path.join(CONFIG_TEMP_DIR, 'padron_reducido_ruc.zip')
+
+  if (os.path.exists(CONFIG_TEMP_DIR)):
+    shutil.rmtree(CONFIG_TEMP_DIR)
+
+  os.mkdir(CONFIG_TEMP_DIR)
   os.system('wget ' + CONFIG_PADRON_REDUCIDO_URL + ' -O ' + filename_zip)
   os.system('unzip ' + filename_zip + ' -d ' + CONFIG_TEMP_DIR)
-  os.system('rm ' + filename_zip)
-  filename = CONFIG_TEMP_DIR + 'padron_reducido_ruc.txt'
+  os.remove(filename_zip)
 
   num_records = sum(1 for line in open(filename, 'r', encoding='ISO-8859-1'))
   num_records -= 1
-  db=_mysql.connect(
+  db=MySQLdb.connect(
     host=CONFIG_MYSQL_HOST,
     user=CONFIG_MYSQL_USER,
-    passwd=CONFIG_MYSQL_PASS,
+    password=CONFIG_MYSQL_PASS,
     db=CONFIG_MYSQL_DB,
   )
  
@@ -45,13 +50,18 @@ def main():
       domicilio_lst = [w.replace('-', '') for w in domicilio_lst]
       domicilio = ' '.join(domicilio_lst).strip()
       domicilio = ' '.join(domicilio.split())
-      query_block += (query_params % (lst[0], lst[1], lst[2], lst[3], lst[4], domicilio))
-      if i < CONFIG_MYSQL_INSERT_GROUP and n < num_records: query_block += ','
+
+      if i == 1:
+        query_block += (query_params % (lst[0], lst[1], lst[2], lst[3], lst[4], domicilio))
+      else:
+        query_block += ',' + (query_params % (lst[0], lst[1], lst[2], lst[3], lst[4], domicilio))
+
       if i == CONFIG_MYSQL_INSERT_GROUP or n == num_records:
         db.query(CONFIG_MYSQL_INSERT_QUERY % query_block)
         i = 0
         query_block = ''
-  os.system('rm ' + filename)
+  
+  shutil.rmtree(CONFIG_TEMP_DIR)
 
 if __name__ == "__main__":
   main()
