@@ -25,8 +25,9 @@ def main():
     user=CONFIG_MYSQL_USER,
     password=CONFIG_MYSQL_PASS,
     db=CONFIG_MYSQL_DB,
+    autocommit=True,
   )
- 
+
   query_params = "('%s','%s','%s','%s','%s','%s', NOW(), NOW())"
 
   i = 0
