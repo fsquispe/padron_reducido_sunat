@@ -22,7 +22,7 @@ CREATE TABLE padron_sunat (
   creado datetime(6) NOT NULL,
   modificado datetime(6) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 """
 CONFIG_MYSQL_INSERT_QUERY="""
 INSERT INTO padron_sunat (
