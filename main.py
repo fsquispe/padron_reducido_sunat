@@ -59,6 +59,7 @@ def main():
 
       if i == CONFIG_MYSQL_INSERT_GROUP or n == num_records:
         db.query(CONFIG_MYSQL_INSERT_QUERY % query_block)
+        db.commit()
         i = 0
         query_block = ''
   
